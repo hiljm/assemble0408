@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=euc-kr">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=720,user-scalable=no">
+<style>
+    html, body, section, img { margin: 0; padding: 0; font-size: 0; line-height: 0; }
+    form input, form select, form button { position: absolute; left: 0; top: 0; background: white; color: #666666; border: 0px solid lime; box-sizing: border-box; }
+    form * { font-family: "맑은 고딕",Arial,Sans-serif; }
+    button { background-color: transparent !important; border: 0px !important; cursor: pointer !important; }
+    .popup_content { box-sizing: border-box; }
+
+    .contents { position: relative; }
+    .background-image { width: 100%; }
+    .hidden { display: none; }
+
+    @media screen and (min-width : 721px) {
+        .only_mo { display: none; }
+        .bgWhite { background: 0px 0px repeat url('images/c20220404_dot_ffffff.png'); }
+        .bgGrey1 { background: 0px 0px repeat url('images/c20220404_dot_f5f5f5.png'); }
+        .bgGrey2 { background: 0px 0px repeat url('images/c20220404_dot_f1f1f1.png'); }
+        .bgGrey3 { background: 0px 0px repeat url('images/c20220404_dot_b8b2b2.png'); }
+        .bgGrey4 { background: 0px 0px repeat url('images/c20220404_dot_5a5a5a.png'); }
+        .bgGrey5 { background: 0px 0px repeat url('images/c20220404_dot_3d3d3d.png'); }
+        .bgPink { background: 0px 0px repeat url('images/c20220404_dot_e1597d.png'); }
+        .bgRed { background: 0px 0px repeat url('images/c20220404_dot_d31145.png'); }
+
+        .contents { margin: auto; width: 1080px; }
+        .floating { position: fixed; right: 30px; top: -350px; transition: .5s; }
+        .floating.on { top: 30px; }
+        .floating .btn-active { display: none; }
+
+        .link_top_logo { position: absolute;top: 0;left: 0;width: 140px;height: 100%; }
+
+        #sec04 .btn-tab { position: absolute; top: 0; left: 10px; width: 350px; height: 69px; background: transparent; border: 0px solid lime; }
+        #sec04 .btn-tab:nth-child(3) { left: 365px; }
+        #sec04 .btn-tab:nth-child(4) { left: 720px; }
+
+        #sec02 form * { margin: 0; padding: 0px 12px; font-size: 20px; font-weight: bold; border-radius: 0px; }
+        #sec02 form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        #sec02 form input[name=rn_cust_name] { top: 207px; left: 645px; width: 306px; height: 50px; }
+        #sec02 form input[name=rn_jumin1] { top: 273px; left: 645px; width: 234px; height: 50px; }
+        #sec02 form select[name=region] { top: 273px; left: 887px; width: 155px; height: 50px; position: absolute;}
+        #sec02 form input[name=cr_mphone] { top: 337px; left: 645px; width: 398px; height: 50px; }
+        #sec02 form button.rn_sex_m { top: 207px; left: 957px; }
+        #sec02 form button.rn_sex_f { top: 207px; left: 1001px; }
+        #sec02 form button.radio { color: #666666; background-color: #dddddd !important; padding: unset; width: 40px; height: 50px; }
+        #sec02 form button.on { color: #dddddd; background-color: #666666 !important; }
+        #sec02 form button.btn-next { top: 434px; left: 645px; width: 397px; height: 66px; border-radius: 100px; }
+
+        #sec14 form * { margin: 0; padding: 0px 12px; font-size: 20px; font-weight: bold; border-radius: 0px; }
+        #sec14 form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        #sec14 form input[name=rn_cust_name] { top: 178px; left: 172px; width: 249px; height: 50px; }
+        #sec14 form input[name=rn_jumin1] { top: 178px; left: 523px; width: 379px; height: 50px; }
+        #sec14 form input[name=cr_mphone] { top: 239px; left: 523px; width: 379px; height: 50px; }
+        #sec14 form select[name=region] { top: 239px; left: 172px; width: 338px; height: 50px; position: absolute;}
+        #sec14 form button.rn_sex_m { top: 178px; left: 426px; }
+        #sec14 form button.rn_sex_f { top: 178px; left: 470px; }
+        #sec14 form button.radio { color: #666666; background-color: #dddddd !important; padding: unset; width: 40px; height: 50px; }
+        #sec14 form button.on { color: #dddddd; background-color: #666666 !important; }
+        #sec14 form button.btn-next { top: 319px; left: 178px; width: 724px; height: 67px; border-radius: 100px; }
+
+        .floating form * { margin: 0; padding: 0px 2px; font-size: 16px; font-weight: bold; border-radius: 0px; }
+        .floating form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        .floating form input[name=rn_cust_name] { top: 67px; left: 18px; width: 134px; height: 37px; }
+        .floating form input[name=rn_jumin1] { top: 119px; left: 18px;width: 203px;; height: 37px; }
+        .floating form input[name=cr_mphone] { top: 222px; left: 18px; width: 203px; height: 37px; }
+        .floating form select[name=region] { top: 170px; left: 18px;width: 203px;; height: 37px; position: absolute;}
+        .floating form button.rn_sex_m { top: 67px; left: 159px; }
+        .floating form button.rn_sex_f { top: 67px; left: 192px; }
+        .floating form button.radio { color: #666666; background-color: #dddddd !important; padding: unset; width: 30px; height: 37px; }
+        .floating form button.on { color: #dddddd; background-color: #666666 !important; }
+        .floating form button.btn-next { top: 274px; left: 18px; width: 202px; height: 49px; border-radius: 100px; }
+
+        /* Popup */
+        .popup * { line-height: 45px; }
+        .popup button { border: none; background: none; }
+        .popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+        .popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+        .popup.agree button { outline: none; }
+        .popup.agree .popup_content { top:40px; width:550px; padding:30px; margin-left:-275px; background:#fff; border:2px solid #d31145; border-radius: 56px; }
+        .popup.agree .popup_content .img {width:74%;}
+        .popup.agree .popup_content .img img {width:100%;}
+        .popup.agree .wrap { padding:0; }
+        .popup.agree .wrap .agree { margin-top: 25px; }
+        .popup.agree .wrap .agree > div { position: relative;  margin-top: 5px;  }
+        .popup.agree .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .popup.agree .wrap .agree label { display:block; height:34px; padding-left: 27px; background: url("./images/c20220404_popup_radio_off.png") no-repeat left 0 top 7px / 20px auto; }
+        .popup.agree .wrap .agree label img { position:relative; top:9px; height:20px; }
+        .popup.agree .wrap .agree label.checked { background-image: url("./images/c20220404_popup_radio_on.png"); }
+        .popup.agree .wrap .agree button { display:inline-block; position: absolute; right: 0; top:0; width:90px; height:34px; text-indent:-9999px; background: url("./images/w20210222_popup_btn_agree_off.png") no-repeat 0 0 / 100% auto; }
+        .popup.agree .wrap .agree button.on { background-image: url("./images/w20210222_popup_btn_agree_on.png"); }
+        .popup.agree .wrap .agree button img { height: 100%; }
+        .popup.agree .wrap .agree .toggle { height:300px; margin:6px 0 10px; border:2px solid #dfdfdf; overflow:auto; }
+        .popup.agree .wrap .agree .toggle img { width:100%; }
+        .popup.agree .wrap .all_check { margin-top:15px; }
+        .popup.agree .wrap .all_check,
+        .popup.agree .wrap .all_check img { width:100%; }
+        .popup.agree .wrap .btn_area .btn_result { display:none; }
+        .popup.agree .wrap .btn_area { margin-top:18px; padding-bottom:36px; }
+        .popup.agree .wrap .btn_area:after { content:""; display:block; clear:both; }
+        .popup.agree .wrap .btn_area a { display:block; float:right; width:218px; }
+        .popup.agree .wrap .btn_area a.btn01,
+        .popup.agree .wrap .btn_area a.btn02 { float:left; }
+        .popup.agree .wrap .btn_area a img { width:100%; }
+        .popup.agree .wrap .btn_area .btn01 { display:none; }
+        .popup.agree .btn_close { display:block; position:absolute; top:25px; right:30px; width:25px; height:25px;  }
+        .popup.agree .btn_close img { width:25px; height: 24px; }
+
+        .popup.comp .popup_content { border-top: 25px solid #d31145; text-align: center; }
+        .popup.comp .popup_content h2 { margin-top: 50px; padding-top: 70px; background: url("./images/c20220404_popup_icon01.png") no-repeat center 0; }
+        .popup.comp .popup_content p.text { margin-top: 30px; font-size: 20px; line-height: 26px; padding: 0 5px; }
+        .popup.comp .popup_content p.text span { color: #d31145; }
+        .popup.comp .popup_content p.guide { margin-top: 16px; font-size: 18px; }
+        .popup.comp .popup_content { width: 512px; height: 406px; margin-top: -203px; margin-left: -256px; }
+        .popup.comp .popup_content h2 { font-size: 42px; }
+        .popup.comp .popup_content h2 span { color:#d31145; }
+        .popup.comp .btn_close { position: absolute; top: 12px; right: 12px; }
+        /* //Popup */
+    }
+    @media screen and (max-width : 720px) {
+        .contents { margin: auto; width: 720px; }
+
+        .link_top_logo { position: absolute;top: 0;left: 0;width: 220px;height: 100%; }
+
+        .floating { position: fixed; left: 0px; bottom: -465px; transition: .5s; }
+        .floating.on { bottom: -325px; }
+        .floating.on.active { bottom: 0px; }
+        .floating .btn-active { display: block; height: 135px; width: 100%; position: absolute; top: 0; left: 0; }
+
+        #sec04 .btn-tab {position: absolute;top: 0;left: 0;width: 240px;height: 70px;background: transparent;border: 0px solid lime;}
+        #sec04 .btn-tab:nth-child(3) {left: 240px;}
+        #sec04 .btn-tab:nth-child(4) {left: 480px;}
+
+        #sec02 form * {margin: 0;padding: 0px 12px;font-size: 22px;font-weight: bold;border-radius: 0px;}
+        #sec02 form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        #sec02 form input[name=rn_cust_name] {top: 1005px;left: 69px;width: 476px;height: 55px;}
+        #sec02 form input[name=rn_jumin1] {top: 1078px;left: 69px;width: 366px;height: 55px;}
+        #sec02 form select[name=region] {top: 1078px;left: 450px;width: 201px;height: 55px;position: absolute;}
+        #sec02 form input[name=cr_mphone] {top: 1150px;left: 69px;width: 582px;height: 55px;}
+        #sec02 form button.rn_sex_m {top: 1005px;left: 557px;}
+        #sec02 form button.rn_sex_f {top: 1005px;left: 606px;}
+        #sec02 form button.radio { color: #666666; background-color: #dddddd !important; padding: unset; width: 44px; height: 55px; }
+        #sec02 form button.on { color: #dddddd; background-color: #666666 !important; }
+        #sec02 form button.btn-next {top: 1236px;left: 96px;width: 526px;height: 52px;border-radius: 100px;}
+
+        #sec14 form * {margin: 0;padding: 0px 12px;font-size: 22px;font-weight: bold;border-radius: 0px;background: #e6e6e6;}
+        #sec14 form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        #sec14 form input[name=rn_cust_name] {top: 240px;left: 69px;width: 477px;height: 55px;}
+        #sec14 form input[name=rn_jumin1] {top: 313px;left: 69px;width: 360px;height: 55px;}
+        #sec14 form input[name=cr_mphone] {top: 384px;left: 69px;width: 582px;height: 55px;}
+        #sec14 form select[name=region] {top: 313px;left: 443px;width: 208px;height: 55px;position: absolute;}
+        #sec14 form button.rn_sex_m {top: 240px;left: 557px;}
+        #sec14 form button.rn_sex_f {top: 240px;left: 606px;}
+        #sec14 form button.radio { color: #666666; background-color: #dddddd !important; padding: unset; width: 45px; height: 55px; }
+        #sec14 form button.on { color: #dddddd; background-color: #666666 !important; }
+        #sec14 form button.btn-next {top: 459px;left: 95px;width: 530px;height: 52px;border-radius: 100px;}
+
+        .floating form * {margin: 0;padding: 0px 16px;font-size: 22px;font-weight: bold;border-radius: 0px;}
+        .floating form input[name=cust_uyn1] { top: 0px; left: 0px; width: 100px; height: 20px; }
+        .floating form input[name=rn_cust_name] {top: 150px;left: 69px;width: 477px;height: 55px;}
+        .floating form input[name=rn_jumin1] {top: 223px;left: 69px;width: 367px;height: 55px;}
+        .floating form input[name=cr_mphone] {top: 295px;left: 69px;width: 584px;height: 55px;}
+        .floating form select[name=region] {top: 223px;left: 451px;width: 200px;height: 55px;position: absolute;}
+        .floating form button.rn_sex_m {top: 150px;left: 558px;}
+        .floating form button.rn_sex_f {top: 150px;left: 607px;}
+        .floating form button.radio {color: #666666;background-color: #dddddd !important; padding: unset;width: 44px;height: 55px;}
+        .floating form button.on { color: #dddddd; background-color: #666666 !important; }
+        .floating form button.btn-next {top: 381px;left: 98px;width: 526px;height: 52px;border-radius: 100px;}
+
+        .popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+        .popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+        .popup.agree button { outline: none; }
+        .popup.agree .popup_content { top:40px; width:550px; padding:30px; margin-left:-275px; background:#fff; border:2px solid #d31145; border-radius: 56px; }
+        .popup.agree .popup_content .img {width:74%;}
+        .popup.agree .popup_content .img img {width:100%;}
+        .popup.agree .wrap { padding:0; }
+        .popup.agree .wrap .agree { margin-top: 25px; }
+        .popup.agree .wrap .agree > div { position: relative;  margin-top: 5px;  }
+        .popup.agree .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .popup.agree .wrap .agree label { display:block; height:34px; padding-left: 27px; background: url("./images/c20220404_popup_radio_off.png") no-repeat left 0 top 7px / 20px auto; }
+        .popup.agree .wrap .agree label img { position:relative; top:9px; height:20px; }
+        .popup.agree .wrap .agree label.checked { background-image: url("./images/c20220404_popup_radio_on.png"); }
+        .popup.agree .wrap .agree button { display:inline-block; position: absolute; right: 0; top:0; width:90px; height:34px; text-indent:-9999px; background: url("./images/w20210222_popup_btn_agree_off.png") no-repeat 0 0 / 100% auto; }
+        .popup.agree .wrap .agree button.on { background-image: url("./images/w20210222_popup_btn_agree_on.png"); }
+        .popup.agree .wrap .agree button img { height: 100%; }
+        .popup.agree .wrap .agree .toggle { height:300px; margin:6px 0 10px; border:2px solid #dfdfdf; overflow:auto; }
+        .popup.agree .wrap .agree .toggle img { width:100%; }
+        .popup.agree .wrap .all_check { margin-top:15px; }
+        .popup.agree .wrap .all_check,
+        .popup.agree .wrap .all_check img { width:100%; }
+        .popup.agree .wrap .btn_area .btn_result { display:none; }
+        .popup.agree .wrap .btn_area { margin-top:18px; padding-bottom:36px; }
+        .popup.agree .wrap .btn_area:after { content:""; display:block; clear:both; }
+        .popup.agree .wrap .btn_area a { display:block; float:right; width:218px; }
+        .popup.agree .wrap .btn_area a.btn01,
+        .popup.agree .wrap .btn_area a.btn02 { float:left; }
+        .popup.agree .wrap .btn_area a img { width:100%; }
+        .popup.agree .wrap .btn_area .btn01 { display:none; }
+        .popup.agree .btn_close { display:block; position:absolute; top:25px; right:30px; width:25px; height:25px;  }
+        .popup.agree .btn_close img { width:100%; }
+
+        .popup.agree .popup_content { width: 93%; left: 3.5%; top: 2%; margin:0; padding:5vw; border-radius: 8vw; }
+        .popup.agree .wrap { padding:0; }
+        .popup.agree .wrap .agree { margin-top: 3.6666vw; }
+        .popup.agree .wrap .agree > div { margin-top: 5px;  }
+        .popup.agree .wrap .agree label { height:6.6666vw; padding-left: 5.1111vw; background-position:0 1.5vw; background-size:3.8888vw auto; }
+        .popup.agree .wrap .agree label img { top:2vw; width:auto; height:3.3333vw; }
+        .popup.agree .wrap .agree button { width:17.5555vw; height:6.6666vw; }
+        .popup.agree .wrap .agree .toggle { height:50vw; margin:1.1111vw 0 2.2222vw; border-width:1px; }
+        .popup.agree .wrap .all_check { margin-top:3vw; }
+        .popup.agree .wrap .btn_area { margin-top:3.3333vw; padding-bottom:4.4444vw; }
+        .popup.agree .wrap .btn_area a { width:42.2222vw; }
+        .popup.agree .btn_close { top:3.3333vw; right:3.3333vw; width:5vw; height:5vw;  }
+
+        .popup.comp .popup_content { width:94%; left: 3%; top: 50%;}
+        .popup.comp .popup_content { border-top: 5vw solid #d31145; text-align: center; padding-bottom:8vw; }
+        .popup.comp .popup_content h2 { margin-top: 10vw; padding-top: 14vw; background: url("./images/c20220404_popup_icon01.png") no-repeat center 0 / 11vw auto; }
+        .popup.comp .popup_content p.text { margin-top: 6vw; font-size: 4vw; line-height: 5.2vw; padding: 0 1vw; }
+        .popup.comp .popup_content p.text span { color: #d31145; }
+        .popup.comp .popup_content p.guide { margin-top: 3.2vw; font-size: 3.6vw; }
+        .popup.comp .popup_content { margin-top:-40vw; }
+        .popup.comp .popup_content h2 { font-size: 8.4vw; line-height:10vw; }
+        .popup.comp .popup_content h2 span { color:#d31145; }
+        .popup.comp .btn_close { position: absolute; top:8px; right: 8px; }
+    }
+</style>
+<script>
+    if(window.NodeList && !NodeList.prototype.forEach) { NodeList.prototype.forEach = Array.prototype.forEach; }
+
+    window.onresize = resizing;
+    window.onscroll = scrolling;
+
+    function init() {
+        resizing();
+        document.querySelector('#sec15 .background-image').onclick = function () {
+            document.querySelector('#sec16').classList.toggle('hidden');
+        }
+        document.querySelector('.floating .btn-active').onclick = function () {
+            document.querySelector('.floating').classList.toggle('active');
+        }
+        document.querySelectorAll('button.radio')
+        .forEach(function(e) {
+            e.onclick = function (e) {
+                var flag = e.target.classList.contains('rn_sex_m');
+                document.querySelectorAll('button.radio')
+                .forEach(function(e) {
+                    if(e.classList.contains(flag ? 'rn_sex_m' : 'rn_sex_f')) {
+                        e.classList.add('on');
+                    } else {
+                        e.classList.remove('on');
+                    }
+                });
+                document.querySelectorAll('input[name=rn_sex]')
+                .forEach(function(e) {
+                    e.value = flag ? 'M' : 'F';
+                });
+            };
+        });
+        document.querySelectorAll('#sec04 .btn-tab')
+        .forEach(function (e) {
+            e.onclick = function (e) {
+                document.querySelector('#sec04 .background-image').src = window.innerWidth > 720 ? e.target.dataset.w : e.target.dataset.m;
+                document.querySelector('#sec05 .background-image').src = document.querySelector('#sec04 .background-image').src.replace('_04', '_05');
+            }
+        });
+        document.querySelectorAll('button.btn-next')
+        .forEach(function (e) {
+            e.onclick = function (e) {
+                document.querySelector('.popup.agree').classList.remove('hidden');
+            }
+        });
+        document.querySelectorAll('.btn_close')
+        .forEach(function (e) {
+            e.onclick = function (e) {
+                document.querySelectorAll('.popup')
+                .forEach(function (e) {
+                    e.classList.add('hidden');
+                });
+            }
+        });
+        document.querySelector('.popup .all_check').onclick = function (e) {
+            document.querySelector('.popup.agree label').classList.add('checked');
+            document.querySelector('.popup.agree').classList.add('hidden');
+            document.querySelector('.popup.comp').classList.remove('hidden');
+        }
+        document.querySelector('.popup.agree label').onclick = function (e) {
+            e.target.classList.toggle('checked');
+        }
+        document.querySelectorAll('input[name=rn_jumin1]')
+        .forEach(function (e) {
+            e.onkeyup = function () {
+                e.value = e.value.replace(/[^0-9]/, '');
+            }
+        });
+        document.querySelectorAll('input[name=cr_mphone]')
+        .forEach(function (e) {
+            e.onkeyup = function () {
+                e.value = e.value.replace(/[^0-9]/, '');
+            }
+        });
+    }
+
+    var bs = null;
+    function resizing() {
+        var s = window.innerWidth > 720;
+        if(bs != s) {
+            document.querySelectorAll('.background-image')
+            .forEach(function(e) {
+                e.src = s ? e.dataset.w : e.dataset.m;
+            });
+            bs = s;
+        }
+    }
+
+    var bo = null;
+    function scrolling() {
+        var o = document.querySelector('#sec03').getBoundingClientRect().y < 0 && document.querySelector('#sec14').getBoundingClientRect().y > window.innerHeight;
+        if(bo != o) {
+            if(o) {
+                document.querySelector('.floating').classList.add('on');
+            } else {
+                document.querySelector('.floating').classList.remove('on');
+            }
+            bo = o;
+        }
+    }
+</script>
+</head>
+<body onload="init();" ondragstart="return false;" onselectstart="return false;" oncontextmenu="return false;">
+    <section id="sec01" class="bgGrey1">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_01.png" data-m="images/m20220404_image_01.png" alt="" title="" />
+            <a href="#" class="link_top_logo"></a>
+        </div>
+    </section>
+    <section id="sec02" class="bgWhite">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_02.png" data-m="images/m20220404_image_02.png" alt="" title="" />
+            <form>
+                <input type="hidden" name="cust_uyn1" value="Y" autocomplete="off" />
+                <input type="hidden" name="rn_sex" value="M" autocomplete="off" />
+                <input type="text" value="" name="rn_cust_name" placeholder="이름" autocomplete="off" />
+                <button type="button" class="rn_sex_m radio on">남</button>
+                <button type="button" class="rn_sex_f radio">여</button>
+                <input type="text" value="" maxlength="6" name="rn_jumin1" placeholder="생년월일 (예 730804)" autocomplete="off" />
+                <select name="region">
+                    <option value="">지역</option>
+                    <option value="서울">서울</option>
+                    <option value="경기도">경기도</option>
+                    <option value="인천">인천</option>
+                    <option value="대전">대전</option>
+                    <option value="충청북도">충청북도</option>
+                    <option value="충청남도">충청남도</option>
+                    <option value="광주">광주</option>
+                    <option value="전라북도">전라북도</option>
+                    <option value="전라남도">전라남도</option>
+                    <option value="대구">대구</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="부산">부산</option>
+                    <option value="울산">울산</option>
+                    <option value="경상남도">경상남도</option>
+                    <option value="강원도(통신상담)">강원도(통신상담)</option>
+                    <option value="제주도(통신상담)">제주도(통신상담)</option>
+                </select>
+                <input type="text" value="" maxlength="11" name="cr_mphone" placeholder="연락처 (예 01012345678)" autocomplete="off" />
+                <button type="button" class="btn-next"></button>
+            </form>
+        </div>
+    </section>
+    <section id="sec03" class="bgPink">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_03.png" data-m="images/m20220404_image_03.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec04" class="bgGrey3">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_04-1.png" data-m="images/m20220404_image_04-1.png" alt="" title="" />
+            <button type="button" class="btn-tab" data-w="images/w20220404_image_04-1.png" data-m="images/m20220404_image_04-1.png"></button>
+            <button type="button" class="btn-tab" data-w="images/w20220404_image_04-2.png" data-m="images/m20220404_image_04-2.png"></button>
+            <button type="button" class="btn-tab" data-w="images/w20220404_image_04-3.png" data-m="images/m20220404_image_04-3.png"></button>
+        </div>
+    </section>
+    <section id="sec05" class="bgWhite">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_05-1.png" data-m="images/m20220404_image_05-1.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec06" class="bgPink">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_06.png" data-m="images/m20220404_image_06.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec07" class="bgWhite">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_07.png" data-m="images/m20220404_image_07.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec08" class="bgPink">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_08.png" data-m="images/m20220404_image_08.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec09" class="bgGrey2">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_09.png" data-m="images/m20220404_image_09.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec10" class="bgPink">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_10.png" data-m="images/m20220404_image_10.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec11" class="bgWhite">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_11.png" data-m="images/m20220404_image_11.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec12" class="bgPink">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_12.png" data-m="images/m20220404_image_12.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec13" class="bgGrey2">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_13.png" data-m="images/m20220404_image_13.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec14" class="bgRed">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_14.png" data-m="images/m20220404_image_14.png" alt="" title="" />
+            <form>
+                <input type="hidden" name="cust_uyn1" value="Y" autocomplete="off" />
+                <input type="hidden" name="rn_sex" value="M" autocomplete="off" />
+                <input type="text" value="" name="rn_cust_name" placeholder="이름" autocomplete="off" />
+                <button type="button" class="rn_sex_m radio on">남</button>
+                <button type="button" class="rn_sex_f radio">여</button>
+                <input type="text" value="" maxlength="6" name="rn_jumin1" placeholder="생년월일 (예 730804)" autocomplete="off" />
+                <select name="region">
+                    <option value="">지역</option>
+                    <option value="서울">서울</option>
+                    <option value="경기도">경기도</option>
+                    <option value="인천">인천</option>
+                    <option value="대전">대전</option>
+                    <option value="충청북도">충청북도</option>
+                    <option value="충청남도">충청남도</option>
+                    <option value="광주">광주</option>
+                    <option value="전라북도">전라북도</option>
+                    <option value="전라남도">전라남도</option>
+                    <option value="대구">대구</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="부산">부산</option>
+                    <option value="울산">울산</option>
+                    <option value="경상남도">경상남도</option>
+                    <option value="강원도(통신상담)">강원도(통신상담)</option>
+                    <option value="제주도(통신상담)">제주도(통신상담)</option>
+                </select>
+                <input type="text" value="" maxlength="11" name="cr_mphone" placeholder="연락처 (예 01012345678)" autocomplete="off" />
+                <button type="button" class="btn-next"></button>
+            </form>
+        </div>
+    </section>
+    <section id="sec15" class="bgGrey4">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_15.png" data-m="images/m20220404_image_15.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec16" class="bgWhite hidden">
+        <div class="contents">
+            <img class="background-image" src="" data-w="images/w20220404_image_16.png" data-m="images/m20220404_image_16.png" alt="" title="" />
+        </div>
+    </section>
+    <section id="sec17" class="bgGrey5">
+        <div class="contents">
+            <img class="background-image" src="images/m20220404_image_17.png" data-w="images/w20220404_image_17.png" data-m="images/m20220404_image_17.png" alt="" title="">
+            <a href="tel:1588-9898" class="only_mo" style="position: absolute; top: 245px; left: 390px; width: 120px; height: 28px; "></a>
+            <a href="tel:1600-0880" class="only_mo" style="position: absolute; top: 285px; left: 375px; width: 120px; height: 28px; "></a>
+            <a href="tel:1566-8777" class="only_mo" style="position: absolute; top: 325px; left: 405px; width: 120px; height: 28px; "></a>
+            <a href="#" class="only_mo" style="position: absolute; top: 623px; left: 287px; width: 143px; height: 33px; "></a>
+            <a href="https://m.facebook.com/korea.aia/" class="only_mo" style="position: absolute;top: 747px;left: 196px;width: 63px;height: 63px;border-radius: 50%;"></a>
+            <a href="https://www.aiablog.co.kr/m" class="only_mo" style="position: absolute;top: 747px;left: 327px;width: 63px;height: 63px;border-radius: 50%;"></a>
+            <a href="https://m.youtube.com/user/AIAcommunity" class="only_mo" style="position: absolute;top: 747px;left: 457px;width: 63px;height: 63px;border-radius: 50%;"></a>
+        </div>
+    </section>
+    <div class="floating">
+        <img class="background-image" src="" data-w="images/w20220404_floating_01.png" data-m="images/m20220404_floating_01.png" alt="" title="" />
+        <div class="btn-active"></div>
+        <form>
+            <input type="hidden" name="cust_uyn1" value="Y" autocomplete="off" />
+            <input type="hidden" name="rn_sex" value="M" autocomplete="off" />
+            <input type="text" value="" name="rn_cust_name" placeholder="이름" autocomplete="off" />
+            <button type="button" class="rn_sex_m radio on">남</button>
+            <button type="button" class="rn_sex_f radio">여</button>
+            <input type="text" value="" maxlength="6" name="rn_jumin1" placeholder="생년월일 (예 730804)" autocomplete="off" />
+            <select name="region">
+                <option value="">지역</option>
+                    <option value="서울">서울</option>
+                    <option value="경기도">경기도</option>
+                    <option value="인천">인천</option>
+                    <option value="대전">대전</option>
+                    <option value="충청북도">충청북도</option>
+                    <option value="충청남도">충청남도</option>
+                    <option value="광주">광주</option>
+                    <option value="전라북도">전라북도</option>
+                    <option value="전라남도">전라남도</option>
+                    <option value="대구">대구</option>
+                    <option value="경상북도">경상북도</option>
+                    <option value="부산">부산</option>
+                    <option value="울산">울산</option>
+                    <option value="경상남도">경상남도</option>
+                    <option value="강원도(통신상담)">강원도(통신상담)</option>
+                    <option value="제주도(통신상담)">제주도(통신상담)</option>
+            </select>
+            <input type="text" value="" maxlength="11" name="cr_mphone" placeholder="연락처 (예 01012345678)" autocomplete="off" />
+            <button type="button" class="btn-next"></button>
+        </form>
+    </div>
+    <div class="popup agree hidden">
+        <div class="mask"></div>
+        <div class="popup_content">
+            <div class="img"><img src="images/c20220404_popup_title01.png" alt="" title="" /></div>
+            <div class="wrap">
+                <div class="agree_area">
+                    <div class="agree">
+                        <div>
+                            <label class="check1">><img src="images/c20220404_popup_text01.png" alt="" title="" /></label>
+                            <div class="toggle"><img src="images/c20220404_popup_agree01.png" alt="" title="" /></div>
+                        </div>
+                    </div>
+                    <button class="all_check">
+                        <img src="images/c20220404_popup_btn01.png" alt="" title="" />
+                    </button>
+                </div>
+            </div>
+            <button class="btn_close">
+                <img src="images/c20220404_popup_btn_close.png" alt="" title="" />
+            </button>
+        </div>
+    </div>
+    <div class="popup comp hidden" >
+        <div class="mask"></div>
+        <div class="popup_content">
+            <h2 class="bold">보험상담 신청이<br><span>완료</span>되었습니다</h2>
+            <p class="text bold">잠시 후 <span>전문상담원</span>이 보장내역과 보험료를
+                <br>친절하게 설명해드립니다. (평일기준)</p>
+            <p class="guide">XXXX-XX-XX XX시 XX분 AIA생명 마케팅수신동의완료</p>
+            <button class="btn_close"><img src="images/c20220404_popup_btn_close02.png" alt="" title=""></button>
+        </div>
+    </div>
+</body>
+</html>
